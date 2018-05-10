@@ -1,4 +1,5 @@
 const puppeteer = require('puppeteer');
+let fs = require('fs');
 
 let scrape = async () => {
     const browser = await puppeteer.launch({
@@ -28,6 +29,11 @@ let scrape = async () => {
 
 scrape().then((value) => {
     console.log(value); // Success!
+    fs.writeFile('result.json', JSON.stringify(value,null,4), 'utf8', function(err){
+        if (err) {
+           return console.log(err)
+        }
+    });
 });
 
 async function getPic() {
